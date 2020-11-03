@@ -114,7 +114,7 @@ class LoginPageState extends State<Login> with ValidaionMixin {
           child: new RaisedButton(
               elevation: 5.0,
               shape: new RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(30.0)
+                borderRadius: new BorderRadius.circular(10.0)
               ),
               color: Colors.blue,
               child: new Text("Giriş",

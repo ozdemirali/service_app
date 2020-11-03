@@ -1,4 +1,10 @@
 class ValidaionMixin{
+
+  String validateInput(String value){
+    if(value.length<2){
+      return "Bu alanı boş geçemezsiniz";
+    }
+  }
   String validateEmail(String value){
     print("şifre");
     print(value);
