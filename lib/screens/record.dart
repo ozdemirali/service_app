@@ -33,6 +33,7 @@ class RecordState extends State<Record> with ValidaionMixin {
           children: <Widget>[
             showIdInput(),
             showPersonInput(),
+            showWorkDescription(),
             showDeviceProblemInput(),
             showDeviceType(),
             showDepartmentInput(),
@@ -70,6 +71,23 @@ class RecordState extends State<Record> with ValidaionMixin {
         autofocus: false,
         decoration: new InputDecoration(
           hintText: "Getiren Kişi",
+        ),
+        validator:validateInput,
+        onSaved: (value){
+        },
+      ),
+    );
+  }
+
+  Widget showWorkDescription(){
+    return new Padding(
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        obscureText: false,
+        autofocus: false,
+        decoration: new InputDecoration(
+          hintText: "İş tanımını giriniz",
         ),
         validator:validateInput,
         onSaved: (value){

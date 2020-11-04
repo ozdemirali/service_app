@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:service_app/screens/endedWork.dart';
 import 'package:service_app/screens/record.dart';
+import 'package:service_app/screens/work.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -47,8 +49,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
         controller: tabController,
         children: <Widget>[
           Record(),
-          Text("İşler"),
-          Text("Bitenler"),
+          Work(),
+          EndedWork(),
           Text("Sorgular"),
         ],
       ),
