@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service_app/widgets/list.dart';
 
 class EndedWork extends StatefulWidget{
   @override
@@ -15,12 +16,12 @@ class EndedWorkState extends State<EndedWork>{
     // TODO: implement build
     return Stack(
       children: <Widget>[
-        endedWorks(),
+        list(context),
       ],
     );
   }
 
-  Widget endedWorks(){
+  /*Widget endedWorks(){
     return new Container(
       padding:EdgeInsets.fromLTRB(0, 2, 0, 0),
       child: new ListView(
@@ -74,5 +75,5 @@ class EndedWorkState extends State<EndedWork>{
         ],
       ),
     );
-  }
+  }*/
 }
