@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "970860762009",
+    "firebase_url": "https://service-626a1.firebaseio.com",
+    "project_id": "service-626a1",
+    "storage_bucket": "service-626a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970860762009:android:2361bae9f3d1ae504cb908",
+        "android_client_info": {
+          "package_name": "meb.service_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970860762009-7kj1mok3q6bs8qlt2g5h7sc4quvhs56h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYvqbTt0thyrXCI-Oxx0ijQBzjfbbRulg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970860762009-7kj1mok3q6bs8qlt2g5h7sc4quvhs56h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

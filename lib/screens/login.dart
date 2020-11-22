@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:service_app/mixins/validation_mixin.dart';
+import 'package:service_app/services/auth.dart';
 
 class Login extends StatefulWidget {
+  Login({this.auth,this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
+  State<StatefulWidget> createState()  {
+    //print(auth);
+    //print(loginCallback);
     return LoginPageState();
   }
 }
 
 class LoginPageState extends State<Login> with ValidaionMixin {
   final formKey = new GlobalKey<FormState>();
+
   String email;
   String password;
   String errorMessage;
 
+  bool isLoading;
+
+
+
+
+
+  @override
+  void initState() {
+    errorMessage="";
+    isLoading=false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Teknik Servis Takip"),
@@ -25,8 +45,19 @@ class LoginPageState extends State<Login> with ValidaionMixin {
       body: Stack(
         children: <Widget>[
           showForm(),
+          showCircularProgress(),
         ],
       ),
+    );
+  }
+
+  Widget showCircularProgress() {
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return Container(
+      height: 0.0,
+      width: 0.0,
     );
   }
 
@@ -42,11 +73,13 @@ class LoginPageState extends State<Login> with ValidaionMixin {
             showEmailInput(),
             showPasswordInput(),
             showLoginButton(),
+            showErrorMessage(),
           ],
         ),
       ),
     );
   }
+
 
   Widget showLogo() {
     return new Hero(
@@ -78,7 +111,7 @@ class LoginPageState extends State<Login> with ValidaionMixin {
         ),
         validator:validateEmail,
         onSaved: (value){
-
+          email=value.trim();
         },
       ),
     );
@@ -100,7 +133,7 @@ class LoginPageState extends State<Login> with ValidaionMixin {
         ),
         validator: validatePassword,
         onSaved: (value){
-
+            password=value.trim();
         },
       ),
     );
@@ -121,7 +154,15 @@ class LoginPageState extends State<Login> with ValidaionMixin {
                 style:new TextStyle(fontSize: 20.0, color: Colors.white)),
               onPressed: (){
                 if(formKey.currentState.validate()){
-                  print("submit");
+
+                  formKey.currentState.save();
+                  submit();
+                }
+                else{
+                  setState(() {
+                    errorMessage="";
+                  });
+
                 }
 
               }),
@@ -129,6 +170,54 @@ class LoginPageState extends State<Login> with ValidaionMixin {
     );
   }
 
+  Widget showErrorMessage(){
+    if(errorMessage.length>0 && errorMessage!=null){
+      return new Padding(
+        padding:const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+        child: new Text(
+          errorMessage,
+          style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.grey,
+              height: 1.0,
+              fontWeight: FontWeight.bold),
+        ),
+      );
+    }else{
+      return new Container(
+        height: 0.0,
+      );
+    }
+  }
 
+  void submit() async{
+    setState(() {
+      errorMessage = "";
+      isLoading=true;
+    });
+    String userId="";
+    //print("Email ..: $email");
+    //print("Password : $password");
+    try{
+      userId = await widget.auth.signIn(email, password);
+      //print("Signed in: $userId");
+
+      setState(() {
+        isLoading = false;
+      });
+
+      if (userId.length > 0 && userId != null) {
+        widget.loginCallback();
+      }
+    }
+    catch(e){
+      //print("Error : $e");
+      setState(() {
+        isLoading = false;
+        errorMessage=e.message;
+        formKey.currentState.reset();
+      });
+    }
+  }
 
 }

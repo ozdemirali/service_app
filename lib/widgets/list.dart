@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:service_app/widgets/show.dart';
 import 'package:service_app/widgets/showDetail.dart';
 
 Widget list(BuildContext context){
@@ -18,7 +19,7 @@ Widget list(BuildContext context){
             title:Text("Sistem kurulacak. Formatlayınız"),
             subtitle: Text("Ayşe Tek"),
             onTap: (){
-              showDetail(context);
+              show(context);
               print("Seçildi");
             },
           ),
@@ -34,7 +35,7 @@ Widget list(BuildContext context){
             title:Text("Sistem kurulacak. Formatlayınız"),
             subtitle: Text("Ayşe Tek"),
             onTap: (){
-              showDetail(context);
+              show(context);
               print("Seçildi");
             },
           ),
@@ -50,8 +51,7 @@ Widget list(BuildContext context){
             title:Text("Sistem kurulacak. Formatlayınız"),
             subtitle: Text("Ayşe Tek"),
             onTap: (){
-              showDetail(context);
-              showDetail(context);
+              show(context);
               print("Seçildi");
             },
           ),
