@@ -154,7 +154,6 @@ class LoginPageState extends State<Login> with ValidaionMixin {
                 style:new TextStyle(fontSize: 20.0, color: Colors.white)),
               onPressed: (){
                 if(formKey.currentState.validate()){
-
                   formKey.currentState.save();
                   submit();
                 }
@@ -162,7 +161,6 @@ class LoginPageState extends State<Login> with ValidaionMixin {
                   setState(() {
                     errorMessage="";
                   });
-
                 }
 
               }),

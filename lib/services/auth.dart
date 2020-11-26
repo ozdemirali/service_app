@@ -41,8 +41,6 @@ abstract class BaseAuth{
     AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
     FirebaseUser user=result.user;
-    //print("----------------");
-    //print(user);
     return user.uid;
   }
 
@@ -58,9 +56,5 @@ abstract class BaseAuth{
   Future<void> signOut()  {
     return _firebaseAuth.signOut();
   }
-
-
-
-
 
 }

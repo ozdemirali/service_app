@@ -16,7 +16,6 @@ class Root extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return RootState();
   }
 
@@ -39,6 +38,7 @@ class RootState extends State<Root> {
       });
     });
   }
+
 
   void loginCallback(){
   widget.auth.getCurrentUser().then((user){
@@ -70,7 +70,7 @@ class RootState extends State<Root> {
 
   @override
   Widget build(BuildContext context) {
-   print(authStatus);
+
      switch (authStatus){
 
        case AuthStatus.NOT_LOGGED_IN:
