@@ -1,62 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:service_app/widgets/show.dart';
-import 'package:service_app/widgets/showDetail.dart';
+import 'package:service_app/models/Job.dart';
+import 'package:service_app/widgets/showAddTodoDialog.dart';
 
-Widget list(BuildContext context){
+Widget Listeleme(BuildContext context,List<Job> jobs){
+var renk=new List(jobs.length);
+
+
   return new Container(
     padding:EdgeInsets.fromLTRB(0, 2, 0, 0),
-    child: new ListView(
-      shrinkWrap: true,
-      children: <Widget>[
-        Card(
-          color: Colors.white,
-          elevation: 2.0,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: Text("M"),
-            ),
-            title:Text("Sistem kurulacak. Formatlayınız"),
-            subtitle: Text("Ayşe Tek"),
-            onTap: (){
-              show(context);
-              print("Seçildi");
-            },
-          ),
-        ),
-        Card(
-          color: Colors.white,
-          elevation: 2.0,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: Text("Mob"),
-            ),
-            title:Text("Sistem kurulacak. Formatlayınız"),
-            subtitle: Text("Ayşe Tek"),
-            onTap: (){
-              show(context);
-              print("Seçildi");
-            },
-          ),
-        ),
-        Card(
-          color: Colors.white,
-          elevation: 2.0,
-          child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Colors.blue,
-              child: Text("Mak"),
-            ),
-            title:Text("Sistem kurulacak. Formatlayınız"),
-            subtitle: Text("Ayşe Tek"),
-            onTap: (){
-              show(context);
-              print("Seçildi");
-            },
-          ),
-        ),
-      ],
-    ),
+    child:ListView.builder(
+        itemCount: jobs.length,
+        itemBuilder:(BuildContext context,int position){
+           return Card(
+             color: Colors.white,
+             elevation: 2.0,
+             child: ListTile(
+               leading: CircleAvatar(
+                 backgroundColor: jobs[position].status=="end"?Colors.blue:jobs[position].status=="new"?Colors.red:Colors.yellow,
+                 child: Text(jobs[position].department.substring(0,3)),
+               ),
+               title:Text(jobs[position].description),
+               subtitle:Text(jobs[position].bringPerson),
+               onTap: (){
+                 //show(context);
+                 showAddTodoDialog(context);
+                 print("Seçildi");
+               },
+             ),
+           );
+        }),
   );
+
 }
+
+
+

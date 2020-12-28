@@ -1,9 +1,19 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:service_app/models/Job.dart';
 import 'package:service_app/widgets/list.dart';
 
 class Work extends StatefulWidget{
+
+  final List<Job> jobProcess;
+  Work({this.jobProcess});
+
+
+
   @override
   State<StatefulWidget> createState() {
+    print(jobProcess.length);
     // TODO: implement createState
     return WorkState();
   }
@@ -16,64 +26,10 @@ class WorkState extends State<Work>{
     // TODO: implement build
     return Stack(
       children: <Widget>[
-        list(context),
+        Listeleme(context,widget.jobProcess),
       ],
     );
   }
 
-  // Widget listWork(){
-  //   return new Container(
-  //     padding:EdgeInsets.fromLTRB(0, 2, 0, 0),
-  //     child: new ListView(
-  //       shrinkWrap: true,
-  //       children: <Widget>[
-  //         Card(
-  //           color: Colors.white,
-  //           elevation: 2.0,
-  //           child: ListTile(
-  //             leading: CircleAvatar(
-  //               backgroundColor: Colors.blue,
-  //               child: Text("M"),
-  //             ),
-  //             title:Text("Sistem kurulacak. Formatlayınız"),
-  //             subtitle: Text("Ayşe Tek"),
-  //             onTap: (){
-  //               print("Seçildi");
-  //             },
-  //           ),
-  //         ),
-  //         Card(
-  //           color: Colors.white,
-  //           elevation: 2.0,
-  //           child: ListTile(
-  //             leading: CircleAvatar(
-  //               backgroundColor: Colors.blue,
-  //               child: Text("Mob"),
-  //             ),
-  //             title:Text("Sistem kurulacak. Formatlayınız"),
-  //             subtitle: Text("Ayşe Tek"),
-  //             onTap: (){
-  //               print("Seçildi");
-  //             },
-  //           ),
-  //         ),
-  //         Card(
-  //           color: Colors.white,
-  //           elevation: 2.0,
-  //           child: ListTile(
-  //             leading: CircleAvatar(
-  //               backgroundColor: Colors.blue,
-  //               child: Text("Mak"),
-  //             ),
-  //             title:Text("Sistem kurulacak. Formatlayınız"),
-  //             subtitle: Text("Ayşe Tek"),
-  //             onTap: (){
-  //               print("Seçildi");
-  //             },
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+
 }
