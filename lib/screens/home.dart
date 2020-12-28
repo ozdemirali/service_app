@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/models/Job.dart';
 import 'package:service_app/screens/endedWork.dart';
+import 'package:service_app/screens/search.dart';
 import 'package:service_app/screens/work.dart';
 import 'package:service_app/services/auth.dart';
 import 'package:service_app/widgets/loginName.dart';
@@ -157,7 +157,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
           EndedWork(
             jobEnd: _jobEnd,
           ),
-          Text("Sorgular"),
+          Search(),
         ],
       ),
       floatingActionButton: FloatingActionButton(

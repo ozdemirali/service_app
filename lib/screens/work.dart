@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:service_app/models/Job.dart';
 import 'package:service_app/widgets/list.dart';

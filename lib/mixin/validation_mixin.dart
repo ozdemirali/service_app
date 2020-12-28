@@ -1,4 +1,4 @@
-class ValidaionMixin{
+class ValidationMixin{
 
   String validateInput(String value){
     if(value.length<2){

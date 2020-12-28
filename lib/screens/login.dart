@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:service_app/mixins/validation_mixin.dart';
+import 'package:service_app/mixin/validation_mixin.dart';
 import 'package:service_app/services/auth.dart';
 
 class Login extends StatefulWidget {
@@ -16,7 +16,7 @@ class Login extends StatefulWidget {
   }
 }
 
-class LoginPageState extends State<Login> with ValidaionMixin {
+class LoginPageState extends State<Login> with ValidationMixin {
   final formKey = new GlobalKey<FormState>();
 
   String email;
