@@ -38,6 +38,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   StreamSubscription<Event> _onJobAddedSubscription;
   StreamSubscription<Event> _onJobChangedSubscription;
+  StreamSubscription<Event> _onJobRemovedSubscription;
+
 
 
 
@@ -55,6 +57,8 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     _onJobAddedSubscription=_jobQuery.onChildAdded.listen(onEntryAdded);
     _onJobChangedSubscription=_jobQuery.onChildChanged.listen(onEntryChanged);
+    _onJobRemovedSubscription=_jobQuery.onChildRemoved.listen(onEntryChanged);
+
 
 
   }
@@ -63,6 +67,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void dispose(){
     _onJobAddedSubscription.cancel();
     _onJobChangedSubscription.cancel();
+    _onJobRemovedSubscription.cancel();
     super.dispose();
   }
 
@@ -84,12 +89,16 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
   }
 
-  // addNewTodo(String todoItem) {
-  //   if (todoItem.length > 0) {
-  //     Todo todo = new Todo(todoItem.toString(), widget.userId, false);
-  //     _database.reference().child("todo").push().set(todo.toJson());
-  //   }
-  // }
+  addNewJob(Job data) {
+    print("add new job");
+    print(data.squareCode);
+    print(data.status);
+
+    // if (todoItem.length > 0) {
+    //   Todo todo = new Todo(todoItem.toString(), widget.userId, false);
+    //   _database.reference().child("todo").push().set(todo.toJson());
+    // }
+  }
 
   // updateTodo(Todo todo) {
   //   //Toggle completed
@@ -112,13 +121,14 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
    if(_jobList.length>0){
-      _jobEnd= _jobList.where((s)=>s.status=="end").toList();
-      _jobProcess=_jobList.where((s)=>s.status!="end").toList();
-     print(_jobEnd.length);
-     print(_jobProcess.length);
+      _jobEnd= _jobList.where((s)=>s.status=="Bitti").toList();
+      _jobProcess=_jobList.where((s)=>s.status!="Bitti").toList();
+     //print(_jobEnd.length);
+     //print(_jobProcess.length);
    }
    else{
-
+    _jobEnd=new List();
+    _jobProcess=new List();
    }
 
  
@@ -162,7 +172,9 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          showAddTodoDialog(context);
+          Job data=new Job("", "", "", "", "", "", "", "", "");
+          //print(data.status);
+          showAddTodoDialog(context,data);
         },
         tooltip: "Kayıt Ekle",
         child: Icon(Icons.add),
