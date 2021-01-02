@@ -57,7 +57,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
     _onJobAddedSubscription=_jobQuery.onChildAdded.listen(onEntryAdded);
     _onJobChangedSubscription=_jobQuery.onChildChanged.listen(onEntryChanged);
-    _onJobRemovedSubscription=_jobQuery.onChildRemoved.listen(onEntryChanged);
+    _onJobRemovedSubscription=_jobQuery.onChildRemoved.listen(onEntryRemoved);
 
 
 
@@ -81,50 +81,32 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     var oldEntry=_jobList.singleWhere((entry){
       return entry.key==event.snapshot.key;
     });
-
     setState(() {
       _jobList[_jobList.indexOf(oldEntry)]=
           Job.fromSnapshot(event.snapshot);
-
     });
   }
 
-  addNewJob(Job data) {
-    print("add new job");
-    print(data.squareCode);
-    print(data.status);
+   onEntryRemoved(Event event){
+    print("Silindi");
+    //print(event.snapshot.key);
 
-    // if (todoItem.length > 0) {
-    //   Todo todo = new Todo(todoItem.toString(), widget.userId, false);
-    //   _database.reference().child("todo").push().set(todo.toJson());
-    // }
-  }
+    var oldEntry=_jobList.singleWhere((entry){
+      return entry.key==event.snapshot.key;
+    });
 
-  // updateTodo(Todo todo) {
-  //   //Toggle completed
-  //   todo.completed = !todo.completed;
-  //   if (todo != null) {
-  //     _database.reference().child("todo").child(todo.key).set(todo.toJson());
-  //   }
-  // }
-
-  // deleteTodo(String todoId, int index) {
-  //   _database.reference().child("todo").child(todoId).remove().then((_) {
-  //     print("Delete $todoId successful");
-  //     setState(() {
-  //       _todoList.removeAt(index);
-  //     });
-  //   });
-  // }
-
+    setState(() {
+      print(_jobList.length);
+      _jobList.remove(oldEntry);
+      print(_jobList.length);
+    });
+   }
 
   @override
   Widget build(BuildContext context) {
    if(_jobList.length>0){
       _jobEnd= _jobList.where((s)=>s.status=="Bitti").toList();
       _jobProcess=_jobList.where((s)=>s.status!="Bitti").toList();
-     //print(_jobEnd.length);
-     //print(_jobProcess.length);
    }
    else{
     _jobEnd=new List();

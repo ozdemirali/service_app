@@ -19,7 +19,7 @@ var renk=new List(jobs.length);
              key: Key(jobs[position].key),
              background: Container(color:Colors.red),
              onDismissed: (direction) async{
-               deleteJob(jobs[position].key,position);
+               deleteJob(jobs[position].key);
              },
              child: Card(
                color: Colors.white,
@@ -44,9 +44,10 @@ var renk=new List(jobs.length);
 
 
 }
-deleteJob(String jobId,int index) {
-  print(jobId);
+deleteJob(String jobId) {
+  //print(jobId);
   _database.reference().child("job").child(jobId).remove().then((_){
+
   });
 }
 

@@ -59,7 +59,7 @@ showAddTodoDialog(BuildContext context,Job data) async {
         return AlertDialog(
           contentPadding: EdgeInsets.only(left:5,right: 5),
           title: Center(
-            child: Text("Bilgi Düzenleme")
+            child:data.squareCode==""?Text("Yeni Kayıt"):Text("Kayıt Düzenleme"),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -84,9 +84,9 @@ showAddTodoDialog(BuildContext context,Job data) async {
                        descriptionInput(),
                        explanationInput(),
                        shelfInput(),
-                       doneWorkInput(),
-                       doneWorkUser(),
-                       Status(),
+                        data.squareCode!=""?doneWorkInput():SizedBox(height: 0,),
+                        data.squareCode!=""?doneWorkUser():SizedBox(height: 0,),
+                        Status(),
 
                       ],
                     ),
@@ -111,19 +111,24 @@ showAddTodoDialog(BuildContext context,Job data) async {
                         if(data.squareCode==""){
                           secim=1;
                         }
+                        else{
+                          secim=2;
+                        }
                     data.squareCode=txtSquareCode.text;
                     data.department=selectDepartment;
                     data.bringPerson=txtBringPerson.text;
                     data.description=txtDescription.text;
                     data.explanation=txtExplanation.text;
                     data.shelf=txtShelf.text;
-                    data.doneWork=txtDoneWork.text;
+
                     data.status=selectStatus;
 
                       if(secim==1) {
                         addNewJob(data);
                       }
                       else{
+                        data.doneWork=txtDoneWork.text;
+                        data.doneUser=txtDoneUser.text;
                         updateJob(data);
                       }
 
@@ -138,34 +143,32 @@ showAddTodoDialog(BuildContext context,Job data) async {
 }
 
 
+
 addNewJob(Job data) {
 
-  //print("add new job");
-  //print(data.squareCode);
-  //print(data.status);
+
 
   if (data !=null) {
     Job job=new Job(data.squareCode, data.department, data.description, data.explanation, data.doneWork, data.doneUser, data.bringPerson, data.status, data.shelf);
-    //Todo todo = new Todo(todoItem.toString(), widget.userId, false);
     _database.reference().child("job").push().set(job.toJson());
   }
-
 }
 
 
 
 updateJob(Job job) {
+  print("Güncelle");
   if (job !=null) {
     _database.reference().child("job").child(job.key).set(job.toJson());
   }
 
 }
 
-deleteJob(String jobId) {
-  print(jobId);
-  _database.reference().child("job").child(jobId).remove().then((_){
-  });
-}
+// deleteJob(String jobId) {
+//   print(jobId);
+//   _database.reference().child("job").child(jobId).remove().then((_){
+//   });
+// }
 
 
 
@@ -290,7 +293,7 @@ Widget doneWorkUser() {
     textCapitalization: TextCapitalization.words,
     keyboardType: TextInputType.text,
     decoration: InputDecoration(
-      labelText: "Yapılan İş",
+      labelText: "Yapan Kişi",
       //hintText: "e.g Morgan",
     ),
     validator: (value){
