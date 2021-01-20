@@ -4,6 +4,58 @@ A new Flutter application.
 
 ## Getting Started
 
+Realtime Database of Firebase is used on this project
+Jason from Database is below
+{
+  "department" : [ null, {
+    "name" : "Bilişim"
+  }, {
+    "name" : "Metal"
+  }, {
+    "name" : "Elektrik ve Elektronik"
+  }, {
+    "name" : "Kimya"
+  }, {
+    "name" : "Makine"
+  }, {
+    "name" : "Mobilya"
+  }, {
+    "name" : "Motor"
+  }, {
+    "name" : "Otomasyon"
+  }, {
+    "name" : "İdare"
+  } ],
+  "job" : {
+    "-MNoDEZxRhF8j5VuACKv" : {
+      "bringPerson" : "Serkan Uçar",
+      "department" : "Kimya",
+      "description" : "Windows kurulacak",
+      "doneUser" : "Test Test",
+      "doneWork" : "Ram bekliyor",
+      "explanation" : "Ekrana görinti gelmiyor",
+      "shelf" : "1.Raf",
+      "squareCode" : "dfdfgdfg",
+      "status" : "Yeni"
+    }
+  },
+  "status" : [ null, {
+    "name" : "Yeni"
+  }, {
+    "name" : "Yapılıyor"
+  }, {
+    "name" : "Bitti"
+  } ],
+  "user" : [ null, {
+    "department" : "Bilişim Teknolojileri",
+    "name" : "Test",
+    "surname" : "T",
+    "uid" : "mit1qWObAIaeqjJSiWu9mo4OAfm1"
+  } ]
+}
+
+Screens are below
+
 ![Login Screen](https://user-images.githubusercontent.com/20681737/105218301-08f50800-5b66-11eb-92b6-92d34824694f.png)
 ![Work List Screen](https://user-images.githubusercontent.com/20681737/105218299-085c7180-5b66-11eb-943a-586b2d172b5d.png)
 ![Finished Work Screen](https://user-images.githubusercontent.com/20681737/105218300-085c7180-5b66-11eb-8e74-f05f3e7f3ed9.png)
