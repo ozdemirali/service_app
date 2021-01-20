@@ -6,6 +6,7 @@ A new Flutter application.
 
 Realtime Database of Firebase is used on this project
 Jason from Database is below
+
 {
   "department" : [ null, {
     "name" : "Bilişim"
