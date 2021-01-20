@@ -2,11 +2,17 @@
 
 A new Flutter application.
 
+## Dependencies
+
+firebase_auth: ^0.14.0+5
+  firebase_database: ^3.0.7
+  flutter_barcode_scanner: ^1.0.1
+
 ## Getting Started
 
 Realtime Database of Firebase is used on this project
-Jason from Database is below
-
+Database is below as Json
+ 
 {
   "department" : [ null, {
     "name" : "Bilişim"
