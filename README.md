@@ -43,7 +43,7 @@ Database is below as Json
       "bringPerson" : "Serkan Uçar",
       "department" : "Kimya",
       "description" : "Windows kurulacak",
-      "doneUser" : "Test Test",
+      "doneUser" : "Ali ÖZDEMİR",
       "doneWork" : "Ram bekliyor",
       "explanation" : "Ekrana görinti gelmiyor",
       "shelf" : "1.Raf",
@@ -62,8 +62,8 @@ Database is below as Json
   
   "user" : [ null, {
     "department" : "Bilişim Teknolojileri",
-    "name" : "Test",
-    "surname" : "T",
+    "name" : "Ali",
+    "surname" : "ÖZDEMİR",
     "uid" : "mit1qWObAIaeqjJSiWu9mo4OAfm1"
   } ]
 }
