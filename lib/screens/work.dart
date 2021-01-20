@@ -11,7 +11,7 @@ class Work extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    print(jobProcess.length);
+    //print(jobProcess.length);
     // TODO: implement createState
     return WorkState();
   }

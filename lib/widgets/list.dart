@@ -8,7 +8,6 @@ final FirebaseDatabase _database=FirebaseDatabase.instance;
 Widget Listeleme(BuildContext context,List<Job> jobs){
 var renk=new List(jobs.length);
 
-
   return new Container(
     padding:EdgeInsets.fromLTRB(0, 2, 0, 0),
     child:ListView.builder(
@@ -32,9 +31,7 @@ var renk=new List(jobs.length);
                  title:Text(jobs[position].description),
                  subtitle:Text(jobs[position].bringPerson),
                  onTap: (){
-                   //show(context);
                    showAddTodoDialog(context,jobs[position]);
-                   print("Seçildi");
                  },
                ),
              ),
@@ -45,10 +42,7 @@ var renk=new List(jobs.length);
 
 }
 deleteJob(String jobId) {
-  //print(jobId);
-  _database.reference().child("job").child(jobId).remove().then((_){
-
-  });
+  _database.reference().child("job").child(jobId).remove().then((_){});
 }
 
 

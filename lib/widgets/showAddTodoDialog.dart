@@ -1,8 +1,8 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:service_app/models/Job.dart';
-import 'package:service_app/screens/home.dart' as home;
 
 TextEditingController txtSquareCode=new TextEditingController();
 TextEditingController txtBringPerson=new TextEditingController();
@@ -15,17 +15,16 @@ TextEditingController txtDoneUser=new TextEditingController();
 String selectDepartment;
 String selectStatus;
 
-List<String> department=["Bilişim","Kimya","Makine","Mobilya","Metal","Otomasyon","İdare"];
-List<String> status=["Yeni","Yapılıyor","Bitti"];
-
-final FirebaseDatabase _database=FirebaseDatabase.instance;
+//List<String> department=["Bilişim","Metal","Elektrik ve Elektronik","Kimya","Makine","Mobilya","Motor","Otomasyon","İdare"];
+//List<String> status=["Yeni","Yapılıyor","Bitti"];
 
 int secim=2;
+
+final FirebaseDatabase _database=FirebaseDatabase.instance;
 
 
 showAddTodoDialog(BuildContext context,Job data) async {
 
-  //print(data);
 
  if(data.squareCode!=""){
    txtSquareCode.text=data.squareCode;
@@ -131,7 +130,6 @@ showAddTodoDialog(BuildContext context,Job data) async {
                         data.doneUser=txtDoneUser.text;
                         updateJob(data);
                       }
-
                     //print(txtSquareCode.text);
                     Navigator.pop(context);
                   }
@@ -145,30 +143,17 @@ showAddTodoDialog(BuildContext context,Job data) async {
 
 
 addNewJob(Job data) {
-
-
-
   if (data !=null) {
     Job job=new Job(data.squareCode, data.department, data.description, data.explanation, data.doneWork, data.doneUser, data.bringPerson, data.status, data.shelf);
     _database.reference().child("job").push().set(job.toJson());
   }
 }
 
-
-
 updateJob(Job job) {
-  print("Güncelle");
   if (job !=null) {
     _database.reference().child("job").child(job.key).set(job.toJson());
   }
-
 }
-
-// deleteJob(String jobId) {
-//   print(jobId);
-//   _database.reference().child("job").child(jobId).remove().then((_){
-//   });
-// }
 
 
 
@@ -314,22 +299,58 @@ class Department extends StatefulWidget{
 }
 
 class _DepartmentState  extends State<Department>{
+
+  List<String> department=new List();
+
+ @override
+ void initState(){
+   super.initState();
+      _database
+          .reference()
+          .child("department").orderByKey()
+          .once()
+          .then((DataSnapshot snapshot){
+            snapshot.value.forEach((value){
+              if(value!=null) {
+                //print(value["name"]);
+                department.add(value["name"].trim());
+              }
+            }
+        );
+      });
+ }
+
+ Future<String> callAsyncFetch()=>Future.delayed(Duration(seconds:1),()=>
+     department.length.toString()
+ );
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return DropdownButtonFormField<String>(
-        value: selectDepartment,
-        items: department
-            .map((label) => DropdownMenuItem(
-          child: Text(label),
-          value: label,
-        )).toList(),
-        onChanged: (value){
-          setState(() {
-            selectDepartment=value;
-          });
-        },
-      );
+    return FutureBuilder<String>(
+        future: callAsyncFetch(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.data!="0") {
+            return DropdownButtonFormField<String>(
+              value: selectDepartment,
+              items: department
+                  .map((label) => DropdownMenuItem(
+                child: Text(label),
+                value: label,
+              )).toList(),
+              onChanged: (value){
+                setState(() {
+                  print(value);
+                  selectDepartment=value;
+                  //print("selected Department");
+                  //print(selectDepartment);
+                });
+              },
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        }) ;
 
   }
 }
@@ -341,22 +362,59 @@ class Status extends StatefulWidget{
 }
 
 class _StatusState  extends State<Status>{
+
+  List<String> status=new List();
+
+  @override
+  void initState(){
+    super.initState();
+    _database
+        .reference()
+        .child("status").orderByKey()
+        .once()
+        .then((DataSnapshot snapshot){
+      snapshot.value.forEach((value){
+        if(value!=null) {
+          //print(value["name"]);
+          status.add(value["name"].trim());
+        }
+      }
+      );
+    });
+  }
+
+  Future<String> callAsyncFetch()=>Future.delayed(Duration(seconds:1),()=>
+      status.length.toString()
+  );
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return DropdownButtonFormField<String>(
-        value: selectStatus,
-        items: status
-            .map((label) => DropdownMenuItem(
-          child: Text(label),
-          value: label,
-        )).toList(),
-        onChanged: (value){
-          setState(() {
-            selectStatus=value;
-          });
-        },
-      );
+    //print(selectStatus);
+   // print(status);
+    return FutureBuilder<String>(
+        future: callAsyncFetch(),
+        builder: (context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.data!="0") {
+            return DropdownButtonFormField<String>(
+              value: selectStatus,
+              items: status
+                  .map((label) => DropdownMenuItem(
+                child: Text(label),
+                value: label,
+              )).toList(),
+              onChanged: (value){
+                setState(() {
+                  selectStatus=value;
+                });
+              },
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }
 

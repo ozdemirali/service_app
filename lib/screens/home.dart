@@ -19,8 +19,6 @@ class Home extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() {
-    //print(auth);
-    //print(logoutCallback);
     return HomeState();
   }
 
@@ -88,7 +86,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
    onEntryRemoved(Event event){
-    print("Silindi");
+    //print("Silindi");
     //print(event.snapshot.key);
 
     var oldEntry=_jobList.singleWhere((entry){
@@ -96,9 +94,9 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
 
     setState(() {
-      print(_jobList.length);
+      //print(_jobList.length);
       _jobList.remove(oldEntry);
-      print(_jobList.length);
+     // print(_jobList.length);
     });
    }
 
@@ -133,7 +131,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: new Text("Çıkış",
             style: new TextStyle(fontSize: 17.0, color: Colors.white)),
             onPressed: (){
-              print("Çıkış");
+              //print("Çıkış");
               signOut();
             },
           )
@@ -169,7 +167,7 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       await widget.auth.signOut();
       widget.logoutCallback();
     } catch (e) {
-      print(e);
+      //print(e);
     }
   }
 }
