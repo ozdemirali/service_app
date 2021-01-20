@@ -12,6 +12,8 @@ A new Flutter application.
 
 ## Getting Started
 
+Authentication of Firebase is used
+
 Realtime Database of Firebase is used on this project
 Database is below as Json
  
