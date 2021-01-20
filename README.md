@@ -27,6 +27,7 @@ Jason from Database is below
   }, {
     "name" : "İdare"
   } ],
+  
   "job" : {
     "-MNoDEZxRhF8j5VuACKv" : {
       "bringPerson" : "Serkan Uçar",
@@ -40,6 +41,7 @@ Jason from Database is below
       "status" : "Yeni"
     }
   },
+  
   "status" : [ null, {
     "name" : "Yeni"
   }, {
@@ -47,6 +49,7 @@ Jason from Database is below
   }, {
     "name" : "Bitti"
   } ],
+  
   "user" : [ null, {
     "department" : "Bilişim Teknolojileri",
     "name" : "Test",
